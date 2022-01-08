@@ -1,5 +1,4 @@
 defmodule Flightex.Users.Agent do
-
   alias Flightex.Users.User
 
   def start_link() do
@@ -8,8 +7,9 @@ defmodule Flightex.Users.Agent do
 
   def save(%User{} = user) do
     Agent.update(__MODULE__, &Map.put(&1, user.id, user))
-    {:ok, "User saved by id #{user.id}"}
   end
+
+  def remove(id), do: Agent.update(__MODULE__, &Map.delete(&1, id))
 
   def get(id), do: Agent.get(__MODULE__, &get_user(&1, id))
 
@@ -17,7 +17,7 @@ defmodule Flightex.Users.Agent do
 
   defp get_user(map, id) do
     case Map.get(map, id) do
-      user when is_struct(user, User) -> user
+      user when is_struct(user, User) -> {:ok, user}
       _ -> {:error, "User not found!"}
     end
   end

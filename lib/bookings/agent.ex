@@ -6,12 +6,11 @@ defmodule Flightex.Bookings.Agent do
     :ok
   end
 
-  def save(%Booking{} = booking) do
-    Agent.update(__MODULE__, &Map.put(&1, booking.id, booking))
-    {:ok, "Booking saved by id #{booking.id}"}
-  end
+  def save(%Booking{} = booking), do: Agent.update(__MODULE__, &Map.put(&1, booking.id, booking))
 
-  def get(id), do: Agent.get(__MODULE__, &get_booking(&1,id))
+  def remove(id), do: Agent.update(__MODULE__, &Map.delete(&1, id))
+
+  def get(id), do: Agent.get(__MODULE__, &get_booking(&1, id))
 
   def get_all, do: Agent.get(__MODULE__, & &1)
 
@@ -21,5 +20,4 @@ defmodule Flightex.Bookings.Agent do
       _ -> {:error, "Booking not found!"}
     end
   end
-
 end
