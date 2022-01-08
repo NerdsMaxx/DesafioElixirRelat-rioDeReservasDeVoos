@@ -3,9 +3,12 @@ defmodule Flightex.Users.User do
   @enforce_keys @keys
   defstruct @keys
 
+  # defp name?(name) do
+  #   String.match?(name, ~r/^[[:alpha:][:blank:]]+$/u)
+  # end
+
   def build(name, cpf, email)
   when is_bitstring(name)
-  and String.match?(name, ~r/^[[:alpha:][:blank:]]+$/u)
   and is_bitstring(cpf)
   and is_bitstring(email)
   do
