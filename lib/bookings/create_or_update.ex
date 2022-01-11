@@ -15,10 +15,9 @@ defmodule Flightex.Bookings.CreateOrUpdate do
       })
   do
     with {:ok, _user} <- UserCoU.get(user_id),
-         {:ok, %Booking{id: id} = booking} <- Booking.build(user_id, local_origin, local_destination, complete_date)
+         {:ok, booking} <- Booking.build(user_id, local_origin, local_destination, complete_date)
     do
       BookingAgent.save(booking)
-      {:ok, id}
     end
   end
 

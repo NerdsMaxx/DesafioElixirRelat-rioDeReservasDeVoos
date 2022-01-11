@@ -6,7 +6,10 @@ defmodule Flightex.Bookings.Agent do
     :ok
   end
 
-  def save(%Booking{} = booking), do: Agent.update(__MODULE__, &Map.put(&1, booking.id, booking))
+  def save(%Booking{id: id} = booking) do
+    Agent.update(__MODULE__, &Map.put(&1, id, booking))
+    {:ok, id}
+  end
 
   def remove(id), do: Agent.update(__MODULE__, &Map.delete(&1, id))
 

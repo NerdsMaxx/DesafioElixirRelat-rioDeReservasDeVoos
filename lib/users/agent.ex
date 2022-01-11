@@ -3,10 +3,12 @@ defmodule Flightex.Users.Agent do
 
   def start_link() do
     Agent.start_link(fn -> %{} end, name: __MODULE__)
+    :ok
   end
 
-  def save(%User{} = user) do
-    Agent.update(__MODULE__, &Map.put(&1, user.id, user))
+  def save(%User{id: id} = user) do
+    Agent.update(__MODULE__, &Map.put(&1, id, user))
+    {:ok, id}
   end
 
   def remove(id), do: Agent.update(__MODULE__, &Map.delete(&1, id))
