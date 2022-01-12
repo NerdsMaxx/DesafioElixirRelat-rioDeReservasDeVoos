@@ -1,0 +1,6 @@
+user = %{name: "Guilherme", cpf: "1324568", email: "hen@gmail.com"}
+booking = %{user_id: "aleatorio", local_origin: "Salvador, Bahia", local_destination: "Goiania, Goias", complete_date: ~N[2022-01-16 12:30:00]}
+booking = %{booking | user_id: user.id}
+
+user = %{name: "Watyson", cpf: "1328968", email: "way@gmail.com"}
+booking = %{user_id: user.id, local_origin: "Porto Seguro, Bahia", local_destination: "Goiania, Goias", complete_date: ~N[2022-02-16 14:30:00]}
