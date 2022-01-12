@@ -21,6 +21,6 @@ defmodule Flightex.Bookings.Booking do
   end
 
   def build(_user_id, _local_origin, _local_destination, _complete_date) do
-    {:error, "Booking not created!"}
+    {:error, "Booking not created"}
   end
 end

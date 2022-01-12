@@ -3,7 +3,15 @@ defmodule Flightex.Users.CreateOrUpdate do
   alias Flightex.Users.User
 
   def start() do
-    UserAgent.start_link()
+    UserAgent.start_link(%{})
+  end
+
+  # def start() do
+  #   UserAgent.start_link()
+  # end
+
+  def call(params) do
+    add(params)
   end
 
   def add(%{
@@ -16,12 +24,12 @@ defmodule Flightex.Users.CreateOrUpdate do
   end
 
   def add(%{}) do
-    {:error, "User not added!"}
+    {:error, "User not added"}
   end
 
   defp add_user({:ok, user}), do: UserAgent.save(user)
 
-  defp add_user({:error, _reason}), do: {:error, "User not added!"}
+  defp add_user({:error, reason}), do: {:error, reason}
 
   def remove(id), do: UserAgent.remove(id)
 

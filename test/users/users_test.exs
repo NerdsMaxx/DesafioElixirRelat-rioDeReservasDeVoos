@@ -10,8 +10,8 @@ defmodule Flightex.Users.UserTest do
       {:ok, response} =
         User.build(
           "Jp",
-          "jp@banana.com",
-          "12345678900"
+          "12345678900",
+          "jp@banana.com"
         )
 
       expected_response = build(:users, id: response.id)
@@ -23,8 +23,8 @@ defmodule Flightex.Users.UserTest do
       response =
         User.build(
           "Jp",
-          "jp@banana.com",
-          112_250_055
+          112_250_055,
+          "jp@banana.com"
         )
 
       expected_response = {:error, "Cpf must be a String"}

@@ -1,10 +1,15 @@
 defmodule Flightex.Bookings.Agent do
   alias Flightex.Bookings.Booking
 
-  def start_link() do
+  def start_link(_initial_state) do
     Agent.start_link(fn -> %{} end, name: __MODULE__)
     :ok
   end
+
+  # def start_link() do
+  #   Agent.start_link(fn -> %{} end, name: __MODULE__)
+  #   :ok
+  # end
 
   def save(%Booking{id: id} = booking) do
     Agent.update(__MODULE__, &Map.put(&1, id, booking))
@@ -19,8 +24,8 @@ defmodule Flightex.Bookings.Agent do
 
   defp get_booking(map, id) do
     case Map.get(map, id) do
-      booking when is_struct(booking, Booking) -> booking
-      _ -> {:error, "Booking not found!"}
+      booking when is_struct(booking, Booking) -> {:ok, booking}
+      _ -> {:error, "Booking not found"}
     end
   end
 end

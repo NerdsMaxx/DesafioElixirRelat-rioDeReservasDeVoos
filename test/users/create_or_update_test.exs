@@ -20,7 +20,7 @@ defmodule Flightex.Users.CreateOrUpdateTest do
 
       CreateOrUpdate.call(params)
 
-      {_ok, response} = Agent.get(params.cpf)
+      {:ok, response} = Agent.get(params.cpf)
 
       expected_response = %Flightex.Users.User{
         cpf: "12345678900",

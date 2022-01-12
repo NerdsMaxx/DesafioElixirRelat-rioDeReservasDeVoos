@@ -22,7 +22,13 @@ defmodule Flightex.Users.User do
     }
   end
 
+  def build(_name, cpf, _email)
+  when not is_bitstring(cpf)
+  do
+    {:error, "Cpf must be a String"}
+  end
+
   def build(_name, _cpf, _email) do
-    {:error, "User not created!"}
+    {:error, "User not created"}
   end
 end

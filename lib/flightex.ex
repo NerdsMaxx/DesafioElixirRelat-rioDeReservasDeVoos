@@ -7,6 +7,9 @@ defmodule Flightex do
     BookingCoU.start()
   end
 
+  #Este é para teste
+  defdelegate create_or_update_booking(params), to: BookingCoU, as: :call
+
   defdelegate addUser(params), to: UserCoU, as: :add
   defdelegate addBooking(params), to: BookingCoU, as: :add
 
