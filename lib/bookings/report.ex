@@ -2,9 +2,8 @@ defmodule Flightex.Bookings.Report do
   alias Flightex.Bookings.Booking
   alias Flightex.Bookings.CreateOrUpdate, as: BookingCoU
 
-  def create(filename \\ "report_bookings.csv") do
-    File.write!(filename, "")
-    {:ok, "File created!"}
+  def create_file(filename \\ "report_bookings.csv") do
+    File.write(filename, "")
   end
 
   def generate_report() do
@@ -24,6 +23,6 @@ defmodule Flightex.Bookings.Report do
   end
 
   defp add_in_report(report, filename \\ "report_bookings.csv") do
-    File.write!(filename, report)
+    File.write!(filename, report, [:append])
   end
 end
